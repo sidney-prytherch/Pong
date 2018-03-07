@@ -1,6 +1,6 @@
 let maxTop = 100;
 let minTop = 0;
-const PADDLE_TOP_CHANGE = 5;
+let paddleTopChange = 5;
 
 class Player {
 
@@ -43,7 +43,7 @@ class Player {
             console.log('error - inconsistent property names?');
         } else {
             clearMovementInterval();
-            const pixelDifference = PADDLE_TOP_CHANGE * (direction === 'up') ? -1 : 1;
+            const pixelDifference = paddleTopChange * (direction === 'up') ? -1 : 1;
             this._paddleMovementInterval = setInterval(() => {
                 this._top(this._top + pixelDistance);
             }, 1000/60);
