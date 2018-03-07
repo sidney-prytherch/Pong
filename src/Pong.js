@@ -1,16 +1,17 @@
 import Player from './Player.js';
 
 const players = [
-    new Player(1, {up: 87, down: 83}, false),
-    new Player(2, {up: 38, down: 40}, false)
+    new Player(1, {up: 87, down: 83}),
+    new Player(2, {up: 38, down: 40})
 ];
 
 /**
  * 
  * @param {KeyboardEvent} event 
  */
-document.onkeydown = (event) => {
+document.addEventListener('keydown', (event) => {
     event = event || window.event;
+    event.preventDefault();
     keySearch:
     for (let player of players) {
         for (let property in player.keyMap) {
@@ -21,14 +22,15 @@ document.onkeydown = (event) => {
             }
         }
     }
-}
+});
 
 /**
  * 
  * @param {KeyboardEvent} event 
  */
-document.onkeyup = (event) => {
+document.addEventListener('keyup', (event) => {
     event = event || window.event;
+    event.preventDefault();
     keySearch:
     for (let player of players) {
         for (let property in player.keyMap) {
@@ -39,4 +41,4 @@ document.onkeyup = (event) => {
             }
         }
     }
-}
+});
