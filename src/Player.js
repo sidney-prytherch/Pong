@@ -45,7 +45,7 @@ class Player {
             clearMovementInterval();
             const pixelDifference = paddleTopChange * (direction === 'up') ? -1 : 1;
             this._paddleMovementInterval = setInterval(() => {
-                this._top(this._top + pixelDistance);
+                this._top(this._top + pixelDifference);
             }, 1000/60);
         }
     }
