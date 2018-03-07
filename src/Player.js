@@ -12,6 +12,17 @@ class Player {
     _paddleMovementInterval
     /** @type {number */
     keyDown;
+
+    /**
+     * 
+     * @param {number} num player number - 1 or 2
+     * @param {{up: number, down: number}} keyMap player keyboard map
+     */
+    constructor(num, keyMap) {
+        this._playerNumber = num;
+        this._keyMap = keyMap;
+        this.keyDown = null;
+    }
     
     get _paddleId() {
         return 'paddle' + this._playerNumber;
@@ -28,16 +39,6 @@ class Player {
     
     set keyDown(key) {
         this.keyDown = key;
-    }
-
-    /**
-     * 
-     * @param {number} num player number - 1 or 2
-     * @param {{up: number, down: number}} keyMap player keyboard map
-     */
-    constructor(num, keyMap) {
-        this._playerNumber = num;
-        this._keyMap = keyMap;
     }
 
     /**
