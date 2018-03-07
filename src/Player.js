@@ -10,6 +10,8 @@ class Player {
     keyMap;
     /** @type {number} */
     _paddleMovementInterval
+    /** @type {number */
+    keyDown;
     
     get _paddleId() {
         return 'paddle' + this._playerNumber;
@@ -22,6 +24,10 @@ class Player {
     set _top(newTop) {
         newTop = Math.min(maxTop, Math.max(minTop, newTop));
         document.getElementById(this._paddleId).style.top = newTop;
+    }
+    
+    set keyDown(key) {
+        this.keyDown = key;
     }
 
     /**
