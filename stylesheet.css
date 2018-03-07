@@ -1,0 +1,18 @@
+.paddle {
+    width: 1%;
+    min-width: 15px;
+    height: 30%;
+    background-color: dodgerblue;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    margin: 10px;
+}
+
+#paddle1 {
+    left: 0;
+}
+
+#paddle2 {
+    right: 0;
+}
