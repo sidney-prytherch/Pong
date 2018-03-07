@@ -15,7 +15,7 @@ document.onkeydown = function(event) {
     for (let player of players) {
         for (let property in player.keyMap) {
             if (event.keyCode === player.keyMap[property]) {
-                player.move(property);
+                player.setMovementInterval(property);
                 break keySearch;
             }
         }
