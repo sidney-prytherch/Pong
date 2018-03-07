@@ -1,6 +1,6 @@
 let maxTop = 100;
 let minTop = 0;
-const changeOnKeyPress = 5;
+const PADDLE_TOP_CHANGE = 5;
 
 class Player {
 
@@ -8,7 +8,9 @@ class Player {
     _playerNumber;
     /** @type {{up: number, down: number}} */
     keyMap;
-
+    /** @type {number} */
+    _paddleMovementInterval
+    
     get _paddleId() {
         return 'paddle' + this._playerNumber;
     }
@@ -36,12 +38,20 @@ class Player {
      * 
      * @param {string} direction 'up' or 'down' - matches property names of keyMap
      */
-    move(direction) {
+    setMovementInterval(direction) {
         if (direction !== 'up' && direction !== 'down') {
             console.log('error - inconsistent property names?');
         } else {
-            this._top(this._top + changeOnKeyPress * ((direction === 'up') ? 1 : -1));
+            clearMovementInterval();
+            const pixelDifference = PADDLE_TOP_CHANGE * (direction === 'up') ? -1 : 1;
+            this._paddleMovementInterval = setInterval(() => {
+                this._top(this._top + pixelDistance);
+            }, 1000/60);
         }
+    }
+    
+    clearMovementInterval() {
+        clearInterval(this._paddleMovementInterval);
     }
     
 }
