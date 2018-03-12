@@ -125,3 +125,59 @@ class Player {
         }
     }
 }
+
+let ballPixelsPerSecond = 15;
+
+class Ball {
+
+	private _x: number;
+	private _y: number;
+	private _lastTimestamp: number;
+	private _moveBall: (timestamp) => void;
+	private _angleOfMovement: number;
+	private _diameter: number;
+	private _maxX = window.innerWidth - this._diameter;
+	private _maxY = window.innerHeight - this._diameter;
+	private _p1p: {left: number, top: number, width: number, right: number};
+	private _p2p: {left: number, top: number, width: number, right: number};
+
+	constructor() {
+		this._moveBall = (timestamp) => {
+			if (!this._lastTimestamp) {
+				this._lastTimestamp = timestamp;
+			}
+			const timeDiff = timestamp - this._lastTimestamp;
+			const distance = ballPixelsPerSecond * timeDiff;
+			let newX = this._x + distance * Math.sin(this._angleOfMovement);
+			let newY = this._y + distance * Math.cos(this._angleOfMovement);
+			if (newY < 0) {
+				newY = Math.abs(newY);
+				this.calculateAngle(3 * Math.PI / 2);
+			}
+			if (newY > this._maxY) {
+				newY = this._maxY - newY;
+				this.calculateAngle(3 * Math.PI);
+			}
+			if (newX < this._p1p.right) {
+				if (newX < 0 && this._x - newX < this._p1p.right) {
+					newX = Math.abs(newX);
+				} else {
+					newX = this._p1p.right - newX;
+				}
+				this.calculateAngle(0);
+			}
+			if (newX > this._p2p.left) {
+				if (newX > this._maxX && this._x - newX < this._p1p.right) {
+					newX = this._maxX - this._diameter - newX;
+				} else {
+					newX = this._p2p.left - this._diameter - newX;
+				}
+				this.calculateAngle(Math.PI);
+			}
+		}
+	}
+
+	calculateAngle(reflectionAngle: number) {
+		this._angleOfMovement = reflectionAngle - (this._angleOfMovement - reflectionAngle) % 2 * Math.PI;
+	}
+}
