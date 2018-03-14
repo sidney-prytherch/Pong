@@ -1,33 +1,59 @@
 .paddle {
-    width: 1%;
-    min-width: 15px;
-    height: 30%;
     background-color: dodgerblue;
-    border-radius: 3px;
+    border-radius: 4px;
     position: absolute;
-    margin: 1px;
 }
 
 #ball {
     background-color: cadetblue;
     position: absolute;
-    height: 3vh;
-    width: 3vh;
-    border-radius: 1.5vh;
-    top: 50;
-    left: 50;
-}
-
-#paddle1 {
-    left: 0;
-    margin-left: 10px;
-}
-
-#paddle2 {
-    right: 0;
-    margin-right: 10px;
 }
 
 body {
     background-color: #222;
+}
+
+#pause {
+    border: thick dodgerblue solid;
+    background-color: #111;
+    border-radius: 2px;
+    z-index: 1;
+    height: 150px;
+    width: 260px;
+    position: absolute;
+    top: calc(50% - 79px);
+    left: calc(50% - 130px);
+}
+
+p {
+    font: bold arial, sans-serif;
+    color: dodgerblue;
+    text-align: center;
+    font-size: 2em;
+}
+
+#pause p {
+    vertical-align: middle;
+}
+
+.score {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    height: 5%;
+    min-height: 30px;
+    width: 10%;
+    min-width: 50px;
+}
+
+.score p {
+    font-size: 2em;
+}
+
+#score1 {
+    left: 0;
+}
+
+#score2 {
+    right: 0;
 }
