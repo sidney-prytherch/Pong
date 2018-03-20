@@ -186,14 +186,9 @@ class Player {
         this.topRatio = newTop / maxTop;
     }
     setMovementInterval(direction) {
-        if (direction !== 'up' && direction !== 'down') {
-            console.log('error - inconsistent property names?');
-        }
-        else {
-            this._direction = direction;
-            window.cancelAnimationFrame(this._paddleMovementInterval);
-            window.requestAnimationFrame(this._step);
-        }
+        this._direction = direction;
+        window.cancelAnimationFrame(this._paddleMovementInterval);
+        window.requestAnimationFrame(this._step);
     }
     pause() {
         this.clearMovementInterval(false);
