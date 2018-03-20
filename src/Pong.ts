@@ -25,6 +25,7 @@ let players: Player[];
 let ball: Ball;
 
 type Paddle = {top: number, right: number, bottom: number, left: number, width: number, height: number, direction: number};
+type Direction = 'up' | 'down';
 
 document.addEventListener('keydown', (event) => {
     if (!paused) {
@@ -32,7 +33,7 @@ document.addEventListener('keydown', (event) => {
             for (let property in player.keyMap) {
                 if (event.keyCode === player.keyMap[property].keyCode && !player.keyMap[property].isPressed) {
                     player.keyMap[property].isPressed = true;
-                    player.setMovementInterval(property);
+                    player.setMovementInterval(property as Direction);
                     return;
                 }
             }
@@ -132,7 +133,7 @@ function pause() {
 
 class Player {
 
-    public keyMap: {[direction: string]: {isPressed: boolean, keyCode: number}};
+    public keyMap: {'up': {isPressed: boolean, keyCode: number}, 'down': {isPressed: boolean, keyCode: number}};
     private _lastTimestamp: number;
     public topRatio: number;
     public _step: (timestamp: number) => void;
@@ -216,7 +217,7 @@ class Player {
         this.topRatio = newTop / maxTop;
     }
 
-    public setMovementInterval(direction: 'up' | 'down') {
+    public setMovementInterval(direction: Direction) {
         this._direction = direction;
         window.cancelAnimationFrame(this._paddleMovementInterval);
         window.requestAnimationFrame(this._step);
@@ -236,7 +237,7 @@ class Player {
         if (onKeyup) {
             for (let property in this.keyMap) {
                 if (direction !== property && this.keyMap[property].isPressed) {
-                    this.setMovementInterval(property);
+                    this.setMovementInterval(property as Direction);
                 }
             }
         }
