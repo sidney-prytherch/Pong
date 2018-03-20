@@ -216,14 +216,10 @@ class Player {
         this.topRatio = newTop / maxTop;
     }
 
-    public setMovementInterval(direction: string) {
-        if (direction !== 'up' && direction !== 'down') {
-            console.log('error - inconsistent property names?');
-        } else {
-            this._direction = direction;
-            window.cancelAnimationFrame(this._paddleMovementInterval);
-            window.requestAnimationFrame(this._step);
-        }
+    public setMovementInterval(direction: 'up' | 'down') {
+        this._direction = direction;
+        window.cancelAnimationFrame(this._paddleMovementInterval);
+        window.requestAnimationFrame(this._step);
     }
 
     public pause() {
